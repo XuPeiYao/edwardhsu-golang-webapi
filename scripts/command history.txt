@@ -1,0 +1,4 @@
+go mod init github.com/XuPeiYao/edwardhsu-golang-webapi/src/app
+go mod init github.com/XuPeiYao/edwardhsu-golang-webapi/src/domain
+go mod init github.com/XuPeiYao/edwardhsu-golang-webapi/src/infra
+go work init ./app ./domain ./infra
