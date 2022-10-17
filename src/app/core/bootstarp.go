@@ -2,6 +2,7 @@ package core
 
 import (
 	"edwardhsu-golang-webapi/app"
+	"edwardhsu-golang-webapi/app/extensions"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
@@ -23,6 +24,7 @@ func initializeContainer() {
 	container = dig.New()
 
 	container.Provide(getContainerByDI)
+	container.Provide(getExtendedContainer)
 	container.Invoke(app.ConfigureServices)
 	//app.ConfigureServices(container)
 
@@ -47,4 +49,8 @@ func runGinEngine(engine *gin.Engine) {
 
 func getContainerByDI() *dig.Container {
 	return container
+}
+
+func getExtendedContainer(container *dig.Container) *extensions.ExtendedContainer {
+	return &extensions.ExtendedContainer{container}
 }
