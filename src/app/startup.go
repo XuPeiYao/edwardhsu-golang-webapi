@@ -4,9 +4,14 @@ import (
 	"edwardhsu-golang-webapi/app/controllers"
 	"edwardhsu-golang-webapi/app/extensions"
 	"edwardhsu-golang-webapi/infra"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
+
+	// SwaggerDoc ref. https://ithelp.ithome.com.tw/articles/10224472
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // DI設定
@@ -27,10 +32,16 @@ func Configure(
 	originalContainer *dig.Container,
 	container *extensions.ExtendedContainer,
 ) {
-	// confgiure api routes
+	// configure api routes
 	originalContainer.Provide(func(r *gin.Engine) *gin.RouterGroup {
 		return r.Group("/api")
 	}, dig.Name("api"))
+
+	// #region Swagger
+	r.Static("/swagger-docs", "./docs")
+	url := ginSwagger.URL(fmt.Sprintf("http://localhost:%d/swagger-docs/swagger.json", 8080))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	// #endregion
 
 	// configure controller routes
 	container.ConfigureGinRoutes()

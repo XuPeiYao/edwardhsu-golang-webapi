@@ -1,0 +1,22 @@
+info:
+  contact: {}
+paths:
+  /api/user/test:
+    get:
+      parameters:
+      - description: Authorization
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Get User Info
+      tags:
+      - User
+swagger: "2.0"
