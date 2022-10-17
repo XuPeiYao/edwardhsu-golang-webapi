@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// 程式進入點
 func main() {
 	fmt.Println("Starting...")
 

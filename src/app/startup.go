@@ -3,22 +3,30 @@ package app
 import (
 	"edwardhsu-golang-webapi/app/controllers"
 	"edwardhsu-golang-webapi/app/extensions"
+	"edwardhsu-golang-webapi/infra"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
 )
 
-func ConfigureServices(originalContainer *dig.Container, container *extensions.ExtendedContainer) {
-	// Add controllers into the container
-	//(&middlewares.ExtendedContainer{container}).AddControllers()
-	//container.Provide(controllers.NewUserController)
-
+// DI設定
+func ConfigureServices(
+	originalContainer *dig.Container, // dig的原始DI容器
+	container *extensions.ExtendedContainer, // 包裝一層的DI容器，用來實現擴充方法AddControllers
+) {
 	container.AddControllers(
 		controllers.NewUserController,
 	)
+
+	originalContainer.Provide(infra.NewMockUserRepository)
 }
 
-func Configure(r *gin.Engine, originalContainer *dig.Container, container *extensions.ExtendedContainer) {
+// Middleware
+func Configure(
+	r *gin.Engine, // gin Engine
+	originalContainer *dig.Container,
+	container *extensions.ExtendedContainer,
+) {
 	// confgiure api routes
 	originalContainer.Provide(func(r *gin.Engine) *gin.RouterGroup {
 		return r.Group("/api")
@@ -26,5 +34,4 @@ func Configure(r *gin.Engine, originalContainer *dig.Container, container *exten
 
 	// configure controller routes
 	container.ConfigureGinRoutes()
-	//container.Invoke(func(c *controllers.UserController) {})
 }
