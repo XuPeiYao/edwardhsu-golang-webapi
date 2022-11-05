@@ -6,7 +6,12 @@
             "request": "launch",
             "mode": "debug",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}/src/main/main.go"
+            "program": "${workspaceFolder}/src/main/main.go",
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": " Listening and serving HTTP on :(\\S+)",
+                "uriFormat": "http://localhost:%s/swagger/index.html"
+            }
         }
     ]
 }
