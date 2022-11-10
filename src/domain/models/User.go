@@ -1,10 +1,10 @@
-package domain
+package models
 
 type Gender int
 
 const (
-	Male = iota
-	Female
+	Male   = 1
+	Female = 2
 )
 
 type User struct {

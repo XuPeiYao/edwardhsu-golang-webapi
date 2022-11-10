@@ -32,10 +32,6 @@ func Configure(
 	originalContainer *dig.Container,
 	container *extensions.ExtendedContainer,
 ) {
-	// configure api routes
-	originalContainer.Provide(func(r *gin.Engine) *gin.RouterGroup {
-		return r.Group("/api")
-	}, dig.Name("api"))
 
 	// #region Swagger
 	r.Static("/swagger-docs", "./docs")

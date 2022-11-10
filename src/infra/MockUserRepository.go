@@ -1,17 +1,20 @@
 package infra
 
-import "edwardhsu-golang-webapi/domain"
+import (
+	domainModels "edwardhsu-golang-webapi/domain/models"
+	domainRepo "edwardhsu-golang-webapi/domain/repositories"
+)
 
 type MockUserRepository struct {
 }
 
-func NewMockUserRepository() domain.IUserRepository {
+func NewMockUserRepository() domainRepo.IUserRepository {
 	return &MockUserRepository{}
 }
 
-func (r *MockUserRepository) GetUser(id string) *domain.User {
-	return &domain.User{
+func (r *MockUserRepository) GetUser(id string) *domainModels.User {
+	return &domainModels.User{
 		Name:   "User " + id,
-		Gender: domain.Male,
+		Gender: domainModels.Male,
 	}
 }
