@@ -3,5 +3,9 @@
         "activityBar.background": "#34235B",
         "titleBar.activeBackground": "#483180",
         "titleBar.activeForeground": "#FBFAFD"
-    }
+    },
+    "explorer.fileNesting.patterns": {
+        "*.go": "${capture}.*.go"
+    },
+    "explorer.fileNesting.enabled": true
 }
