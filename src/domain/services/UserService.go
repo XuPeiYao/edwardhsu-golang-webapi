@@ -10,8 +10,9 @@ type UserService struct {
 }
 
 func NewUserService(userRepository repositories.IUserRepository) *UserService {
-	service := &UserService{}
-	service.userRepository = userRepository
+	service := &UserService{
+		userRepository: userRepository,
+	}
 
 	return service
 }

@@ -13,8 +13,6 @@ func (this *ExtendedContainer) AddControllers(constructors ...interface{}) {
 		return
 	}
 
-	addedControllers = append(addedControllers, constructors)
-
 	for _, element := range constructors {
 		this.Container.Provide(element)
 		addedControllers = append(addedControllers, element)

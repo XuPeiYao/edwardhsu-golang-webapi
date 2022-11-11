@@ -10,12 +10,12 @@ import (
 
 type UserController struct {
 	container   *dig.Container
-	userService domainServices.UserService
+	userService *domainServices.UserService
 }
 
 func NewUserController(
 	router *gin.Engine,
-	userService domainServices.UserService,
+	userService *domainServices.UserService,
 	container *dig.Container, // 類似於.NET的 IServiceProvider
 ) *UserController {
 	controller := &UserController{

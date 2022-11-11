@@ -26,6 +26,7 @@ func ConfigureServices(
 
 	originalContainer.Provide(services.NewUserService)
 	originalContainer.Provide(infra.NewMockUserRepository)
+
 }
 
 // Middleware
@@ -34,7 +35,6 @@ func Configure(
 	originalContainer *dig.Container,
 	container *extensions.ExtendedContainer,
 ) {
-
 	// #region Swagger
 	r.Static("/swagger-docs", "./docs")
 	url := ginSwagger.URL(fmt.Sprintf("http://localhost:%d/swagger-docs/swagger.json", 8080))
