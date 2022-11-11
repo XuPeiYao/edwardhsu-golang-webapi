@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	domainRepo "edwardhsu-golang-webapi/domain/repositories"
+	domainServices "edwardhsu-golang-webapi/domain/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,18 +9,18 @@ import (
 )
 
 type UserController struct {
-	container      *dig.Container
-	userRepository domainRepo.IUserRepository
+	container   *dig.Container
+	userService domainServices.UserService
 }
 
 func NewUserController(
 	router *gin.Engine,
-	userRepository domainRepo.IUserRepository,
+	userService domainServices.UserService,
 	container *dig.Container, // 類似於.NET的 IServiceProvider
 ) *UserController {
 	controller := &UserController{
-		container:      container,
-		userRepository: userRepository,
+		container:   container,
+		userService: userService,
 	}
 
 	userControllerRouterGroup := router.Group("/api/user")  // 設定這個controller的路由，相關方法以此做為父路由
@@ -37,6 +37,6 @@ func NewUserController(
 // @Success 200 string string 成功後返回的值
 // @Router /api/user/test [get]
 func (this *UserController) Test(context *gin.Context) {
-	user := this.userRepository.GetUser("123")
+	user := this.userService.FindUserByUid("123")
 	context.JSON(http.StatusOK, user)
 }

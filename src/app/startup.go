@@ -3,6 +3,7 @@ package app
 import (
 	"edwardhsu-golang-webapi/app/controllers"
 	"edwardhsu-golang-webapi/app/extensions"
+	"edwardhsu-golang-webapi/domain/services"
 	"edwardhsu-golang-webapi/infra"
 	"fmt"
 
@@ -23,6 +24,7 @@ func ConfigureServices(
 		controllers.NewUserController,
 	)
 
+	originalContainer.Provide(services.NewUserService)
 	originalContainer.Provide(infra.NewMockUserRepository)
 }
 

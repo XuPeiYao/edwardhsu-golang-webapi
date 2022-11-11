@@ -1,10 +1,21 @@
 package services
 
-import "edwardhsu-golang-webapi/domain/models"
+import (
+	"edwardhsu-golang-webapi/domain/models"
+	"edwardhsu-golang-webapi/domain/repositories"
+)
 
 type UserService struct {
+	userRepository repositories.IUserRepository
 }
 
-func (this *UserService) FindUserByUid(uid int64) *models.User {
-	return nil
+func NewUserService(userRepository repositories.IUserRepository) *UserService {
+	service := &UserService{}
+	service.userRepository = userRepository
+
+	return service
+}
+
+func (this *UserService) FindUserByUid(uid string) *models.User {
+	return this.userRepository.GetUser(uid)
 }
