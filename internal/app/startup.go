@@ -2,9 +2,11 @@ package app
 
 import (
 	"edwardhsu-golang-webapi/app/controllers"
+	"edwardhsu-golang-webapi/app/core"
 	"edwardhsu-golang-webapi/app/extensions"
 	"edwardhsu-golang-webapi/domain/services"
 	"edwardhsu-golang-webapi/infra"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
@@ -15,7 +17,10 @@ import (
 func ConfigureServices(
 	originalContainer *dig.Container, // dig的原始DI容器
 	container *extensions.ExtendedContainer, // 包裝一層的DI容器，用來實現擴充方法AddControllers
+	config core.Configuration,
 ) {
+	fmt.Printf("Mock connection string is %s.", config.GetValue("ConnectionStrings:Mock"))
+
 	container.AddControllers(
 		controllers.NewUserController,
 	)

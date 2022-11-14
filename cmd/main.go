@@ -1,6 +1,7 @@
 package main
 
 import (
+	"edwardhsu-golang-webapi/app"
 	"edwardhsu-golang-webapi/app/core"
 	"fmt"
 )
@@ -9,5 +10,5 @@ import (
 func main() {
 	fmt.Println("Starting...")
 
-	core.Boot()
+	core.Boot(app.ConfigureServices, app.Configure)
 }
