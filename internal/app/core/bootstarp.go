@@ -9,6 +9,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
+
+	. "github.com/ahmetb/go-linq/v3"
 )
 
 var container *dig.Container
@@ -20,15 +22,18 @@ func Boot(configureServices any, configure any) {
 	container.Invoke(runGinEngine)
 }
 
+func IsDebug() bool {
+	return gin.Mode() == gin.DebugMode
+}
+
 func initializeContainer(configureServices any) {
 	fmt.Println("Initial container.")
 
 	container = dig.New()
 
+	container.Provide(getConfiguration)
 	container.Provide(getContainerByDI)
 	container.Provide(getExtendedContainer)
-
-	container.Provide(getConfiguration)
 
 	container.Invoke(configureServices)
 
@@ -39,7 +44,12 @@ func initializeGinEngine(configure any) {
 	fmt.Println("Initial gin engine.")
 
 	container.Provide(func() *gin.Engine {
-		return gin.Default()
+		r := gin.New()
+
+		r.Use(JsonLoggerMiddleware())
+		r.Use(gin.Recovery())
+
+		return r
 	})
 
 	container.Invoke(configure)
