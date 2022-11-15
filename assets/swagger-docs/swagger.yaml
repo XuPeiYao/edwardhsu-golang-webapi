@@ -1,22 +1,32 @@
+definitions:
+  models.User:
+    properties:
+      eid:
+        type: string
+      status:
+        type: string
+      uid:
+        type: integer
+    type: object
 info:
   contact: {}
 paths:
-  /api/user/test:
+  /api/user/{uid}:
     get:
       parameters:
-      - description: Authorization
-        in: header
-        name: Authorization
+      - description: User UID
+        in: path
+        name: uid
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            type: string
-      summary: Get User Info
+            $ref: '#/definitions/models.User'
+      summary: Find User by UID
       tags:
       - User
 swagger: "2.0"

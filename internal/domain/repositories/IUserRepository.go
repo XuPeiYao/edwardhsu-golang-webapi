@@ -3,5 +3,5 @@ package repositories
 import "edwardhsu-golang-webapi/domain/models"
 
 type IUserRepository interface {
-	GetUser(id string) *models.User
+	FindUserByUid(uid int64) *models.User
 }

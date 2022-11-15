@@ -9,8 +9,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
-
-	. "github.com/ahmetb/go-linq/v3"
 )
 
 var container *dig.Container

@@ -17,6 +17,6 @@ func NewUserService(userRepository repositories.IUserRepository) *UserService {
 	return service
 }
 
-func (this *UserService) FindUserByUid(uid string) *models.User {
-	return this.userRepository.GetUser(uid)
+func (this *UserService) FindUserByUid(uid int64) *models.User {
+	return this.userRepository.FindUserByUid(uid)
 }

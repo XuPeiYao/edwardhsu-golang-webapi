@@ -4,7 +4,7 @@
         "contact": {}
     },
     "paths": {
-        "/api/user/test": {
+        "/api/user/{uid}": {
             "get": {
                 "produces": [
                     "application/json"
@@ -12,13 +12,13 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Get User Info",
+                "summary": "Find User by UID",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
+                        "type": "integer",
+                        "description": "User UID",
+                        "name": "uid",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -26,9 +26,25 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.User"
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "eid": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "integer"
                 }
             }
         }
