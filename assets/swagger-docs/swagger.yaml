@@ -3,12 +3,25 @@ definitions:
     properties:
       eid:
         type: string
-      meta:
-        type: string
+      profile:
+        $ref: '#/definitions/models.UserProfile'
       status:
         type: string
       uid:
         type: integer
+    type: object
+  models.UserProfile:
+    properties:
+      contact_address:
+        type: string
+      contact_cellphone:
+        type: string
+      contact_telephone:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
     type: object
 info:
   contact: {}
@@ -30,6 +43,24 @@ paths:
           schema:
             $ref: '#/definitions/models.User'
       summary: Create a new User
+      tags:
+      - User
+    put:
+      parameters:
+      - description: Update user info
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Update User
       tags:
       - User
   /api/user/{uid}:

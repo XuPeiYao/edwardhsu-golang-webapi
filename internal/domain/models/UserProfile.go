@@ -6,4 +6,5 @@ type UserProfile struct {
 	ContactAddress   string
 	ContactTelephone string
 	ContactCellphone string
+	AvatarUrl        *string
 }

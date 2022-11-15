@@ -21,16 +21,25 @@ func NewMockUserRepository() domainRepo.IUserRepository {
 			UID:    1,
 			EID:    "A001",
 			Status: domainModels.Enabled,
+			Profile: &domainModels.UserProfile{
+				Name: "TestUser1",
+			},
 		},
 		&domainModels.User{
 			UID:    2,
 			EID:    "A002",
 			Status: domainModels.Disabled,
+			Profile: &domainModels.UserProfile{
+				Name: "TestUser2",
+			},
 		},
 		&domainModels.User{
 			UID:    3,
 			EID:    "A003",
 			Status: domainModels.Enabled,
+			Profile: &domainModels.UserProfile{
+				Name: "TestUser3",
+			},
 		},
 	)
 
@@ -58,4 +67,5 @@ func (this *MockUserRepository) SaveUser(user *domainModels.User) {
 
 	currentRecord.EID = user.EID
 	currentRecord.Status = user.Status
+	currentRecord.Profile = user.Profile
 }

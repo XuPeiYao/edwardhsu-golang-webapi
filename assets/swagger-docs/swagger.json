@@ -5,6 +5,34 @@
     },
     "paths": {
         "/api/user": {
+            "put": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update User",
+                "parameters": [
+                    {
+                        "description": "Update user info",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
+            },
             "post": {
                 "produces": [
                     "application/json"
@@ -70,14 +98,34 @@
                 "eid": {
                     "type": "string"
                 },
-                "meta": {
-                    "type": "string"
+                "profile": {
+                    "$ref": "#/definitions/models.UserProfile"
                 },
                 "status": {
                     "type": "string"
                 },
                 "uid": {
                     "type": "integer"
+                }
+            }
+        },
+        "models.UserProfile": {
+            "type": "object",
+            "properties": {
+                "contact_address": {
+                    "type": "string"
+                },
+                "contact_cellphone": {
+                    "type": "string"
+                },
+                "contact_telephone": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
                 }
             }
         }
