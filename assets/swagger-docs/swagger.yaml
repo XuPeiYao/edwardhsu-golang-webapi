@@ -3,6 +3,8 @@ definitions:
     properties:
       eid:
         type: string
+      meta:
+        type: string
       status:
         type: string
       uid:
@@ -11,6 +13,25 @@ definitions:
 info:
   contact: {}
 paths:
+  /api/user:
+    post:
+      parameters:
+      - description: New user info
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Create a new User
+      tags:
+      - User
   /api/user/{uid}:
     get:
       parameters:

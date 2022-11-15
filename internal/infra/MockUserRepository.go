@@ -48,3 +48,14 @@ func (this *MockUserRepository) FindUserByUid(uid int64) *domainModels.User {
 
 	return foundUser.(*domainModels.User)
 }
+
+func (this *MockUserRepository) SaveUser(user *domainModels.User) {
+	currentRecord := this.FindUserByUid(user.UID)
+	if currentRecord == nil {
+		this.store = append(this.store, user)
+		return
+	}
+
+	currentRecord.EID = user.EID
+	currentRecord.Status = user.Status
+}

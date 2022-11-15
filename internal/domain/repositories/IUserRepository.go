@@ -1,7 +1,8 @@
 package repositories
 
-import "edwardhsu-golang-webapi/domain/models"
+import domainModels "edwardhsu-golang-webapi/domain/models"
 
 type IUserRepository interface {
-	FindUserByUid(uid int64) *models.User
+	FindUserByUid(uid int64) *domainModels.User
+	SaveUser(user *domainModels.User)
 }

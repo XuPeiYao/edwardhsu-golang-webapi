@@ -4,6 +4,36 @@
         "contact": {}
     },
     "paths": {
+        "/api/user": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a new User",
+                "parameters": [
+                    {
+                        "description": "New user info",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
+            }
+        },
         "/api/user/{uid}": {
             "get": {
                 "produces": [
@@ -38,6 +68,9 @@
             "type": "object",
             "properties": {
                 "eid": {
+                    "type": "string"
+                },
+                "meta": {
                     "type": "string"
                 },
                 "status": {
